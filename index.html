@@ -14,10 +14,22 @@
 
     <script type="text/javascript" src="js/libs/jszip.min.js"></script>
     <script type="text/javascript" src="js/libs/jszip-utils.min.js"></script>
+    <script type="text/javascript" src="js/libs/FileSaver.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
     <script type="text/javascript" src="js/ViewModel.js"></script>
     <script type="text/javascript" src="js/Index.js"></script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61189972-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 
     <script type="text/html" id="ReplaceValueTmpl">
         <label for="PluginName" data-bind="text: Title"></label>
@@ -114,8 +126,9 @@
             </div>
         </div>
 
-        <div id="AddNewPlugin" class="ribbon l-box-lrg pure-g">
+        <div id="AddNewPlugin" class="ribbon l-box-lrg">
             <h2 class="content-head is-center content-head-ribbon">Add a new plugin template</h2>
+
             <div class="pure-g">
                 <div class="pure-u-1-2">
                     <p>If you want to add a new plugin base to this site then just fork the GitHub repo and submit a pull request with the new plugin.</p>
