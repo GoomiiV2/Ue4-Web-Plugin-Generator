@@ -1,0 +1,13 @@
+{
+    "Plugins" :
+    [
+        {
+            "Name" : "Blank Plugin by Epic",
+            "Url" : "plugins/BlankPlugin"
+        },
+        {
+            "Name" : "UObject Plugin by Epic",
+            "Url" : "plugins/UObjectPlugin"
+        }
+    ]
+}

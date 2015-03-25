@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A plugin generator for Unreal Engine 4">
+
+    <title>Ue4 Plugin Generator</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script type="text/javascript" src="js/libs/jszip.min.js"></script>
+    <script type="text/javascript" src="js/libs/jszip-utils.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
+    <script type="text/javascript" src="js/ViewModel.js"></script>
+    <script type="text/javascript" src="js/Index.js"></script>
+
+    <script type="text/html" id="ReplaceValueTmpl">
+        <label for="PluginName" data-bind="text: Title"></label>
+        <!-- ko if: typeof Options == 'undefined' -->
+            <input
+                    data-bind="attr: {placeholder : ToolTip, title : ToolTip},
+                    value: _RepalceWith"
+                    class="pure-u-1">
+        <!-- /ko -->
+
+        <!-- ko ifnot: typeof Options == 'undefined' -->
+            <select id="PluginType" class="pure-u-1"
+                    data-bind="options: Options,
+                    attr: {title : ToolTip},
+                    value: _RepalceWith">
+            </select>
+        <!-- /ko -->
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="">Ue4 Plugin Generator</a>
+        </div>
+    </div>
+
+    <div class="splash-container">
+        <div class="splash">
+            <h1 class="splash-head">Ue4 Plugin Generator</h1>
+            <p class="splash-subhead">
+                Fill out a few forms and get a base plugin to build off of
+            </p>
+            <p>
+                <a href="#PluginCreate" class="pure-button pure-button-primary">Create Plugin Template</a>
+                <a href="#AddNewPlugin" class="pure-button pure-button-primary">Add new template</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div id="PluginCreate" class="content">
+
+
+            <div class="pure-g">
+                <div id="PluginInstructions" class="pure-u-1-3"">
+                    <h2 class="content-head is-center">Instructions</h2>
+                    <p>
+                        Select your plugin template from the Plugin Type drop down and then fill out all the feilds to customise it to your needs.
+                    </p>
+                    <p>
+                        Now Click the "Create Plugin!" button to get the zip, simple huh :><br>
+                        All you need do now is unzip it into your Plugins folder in your UE4 projects folder.
+                    </p>
+
+                    <h2 class="content-head is-center">Helpful Links</h2>
+                    <ul>
+                        <li><a href="https://wiki.unrealengine.com/An_Introduction_to_UE4_Plugins#Non-Game_Module">UE4 Wiki: An Introduction to UE4 Plugins</a></li>
+                        <li><a href="https://docs.unrealengine.com/latest/INT/Programming/Plugins/index.html">Official Docs on Plugins</a></li>
+                    </ul>
+
+                <h2 class="content-head is-center">Contact</h2>
+                <p>
+                    If you need to contact me you can shoot me a pm on the <a href="https://forums.unrealengine.com/member.php?30492-Goomii">forums here.</a>
+                </p>
+                </div>
+
+                <div class="pure-u-1-3">
+                    <h2 class="content-head is-center">Create Plugin</h2>
+
+                    <form class="pure-form pure-form-stacked">
+                        <fieldset>
+                            <label for="PluginType">Plugin Type</label>
+                            <select id="PluginType" class="pure-u-1"
+                                    data-bind="options: PluginTemplates,
+                                    optionsValue: 'Url',
+                                    optionsText: 'Name',
+                                    value: SelectedPlugin">
+                            </select>
+
+                            <div data-bind="foreach: ReplaceValues">
+                                <div data-bind="template: { name: 'ReplaceValueTmpl', data: $data }" style="float:left; width:50%; padding-right:20px;"></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <button onClick="CreatePlugin();" class="pure-button pure-button-primary pure-u-1">Create Plugin!</button>
+                </div>
+
+                <div id="TemplateInfo" class="pure-u-1-3">
+                    <h2 class="content-head is-center">Template Info</h2>
+                    <h3 class="is-center" data-bind="text: TemplateHeader"></h3>
+                    <p class="is-center"><a data-bind="text: TemplateUrl, attr: {href : TemplateUrl}"></a></p>
+                    <p class="is-center" data-bind="text: TemplateDesc"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="AddNewPlugin" class="ribbon l-box-lrg pure-g">
+            <h2 class="content-head is-center content-head-ribbon">Add a new plugin template</h2>
+            <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <p>If you want to add a new plugin base to this site then just fork the GitHub repo and submit a pull request with the new plugin.</p>
+                    <p>
+                        The process of adding a new template is simple enough:
+                        <ol>
+                            <li>Create a new folder under plugins with the name of your plugin template</li>
+                            <li>Create a new file called "Meta.json", you can copy one of the existing ones as a base</li>
+                            <li>
+                                Edit the "Meta.json" to match your needs, the important part is the "ReplaceValues" array.<br>
+                                This is an array of values to take from the user and to replace in your plugins files or filename.<br>
+                                "Title" is what is shown on the web page, "ToolTip" is the, well tool tip and short description,<br>
+                                "Value" is the value to replace, (when adding these to the files surround the in curry brackets<br>
+                                e.g. a value of "PluginName" would be "{{PluginName}}" where you want it replaced in the files<br>
+                                "_RepalceWith" should be left as an empty string unless you want to set a default value.
+                            </li>
+                            <li>
+                                Now you need to place the replace tags in the files or the filename that you want replaced<br>
+                                Remember to wrap them in "{{}}".
+                            </li>
+                            <li>
+                                Now zip the folder up but don't compress it, use the "Store" option in WinRar<br>
+                                This is to ease the work load on the browser.
+                            </li>
+                            <li>
+                                Finally add an entry to "pluginBases.json" for your Plugin and submit a Pull Request on GitHub
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="pure-u-1-2">
+                    <div style="float: right;">
+                        <a href="https://github.com/GoomiChan/Ue4-Web-Plugin-Generator">
+                            <img src="img/github.png" style="float: left;"/><br>
+                        </a>
+                        <span style="float: left; text-align: center; width: 100%;">View on GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

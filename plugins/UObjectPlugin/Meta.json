@@ -1,0 +1,54 @@
+{
+    "Name" : "UObject Plugin",
+    "Author": "Epic",
+    "Site" : "www.epicgames.com",
+    "Desc" : "A basic UObject plugin template provided by Epic with Unreal Engine 4",
+    "Zip" : "plugins/UObjectPlugin/UObjectPlugin.zip",
+
+    "ReplaceValues" :
+        [
+            {
+                "Title" : "Plugin Name",
+                "Value" : "PluginName",
+                "ToolTip" : "The Name for this Plugin",
+                "_RepalceWith": ""
+            },
+            {
+                "Title" : "Author",
+                "Value" : "Author",
+                "ToolTip" : "The Author of this plugin",
+                "_RepalceWith": ""
+            },
+            {
+                "Title" : "Created By URL",
+                "Value" : "CreatedByURL",
+                "ToolTip" : "Your webpage if you have one",
+                "_RepalceWith": ""
+            },
+            {
+                "Title" : "Engine Version",
+                "Value" : "EngineVersion",
+                "ToolTip" : "What engine version you are targeting",
+                "_RepalceWith": "4.7.3"
+            },
+            {
+                "Title" : "Description",
+                "Value" : "Description",
+                "ToolTip" : "What does the plugin do?",
+                "_RepalceWith": ""
+            },
+            {
+                "Title" : "Category",
+                "Value" : "Category",
+                "ToolTip" : "What Category to list under in the editor",
+                "_RepalceWith": ""
+            },
+            {
+                "Title" : "Type",
+                "Value" : "Type",
+                "Options" : ["Runtime", "Developer", "Editor", "EditorNoCommandlet", "Program"],
+                "ToolTip" : "What type of plugin is it",
+                "_RepalceWith": ""
+            }
+        ]
+}
