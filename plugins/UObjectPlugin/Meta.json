@@ -1,7 +1,7 @@
 {
     "Name" : "UObject Plugin",
     "Author": "Epic",
-    "Site" : "www.epicgames.com",
+    "Site" : "http://www.epicgames.com",
     "Desc" : "A basic UObject plugin template provided by Epic with Unreal Engine 4",
     "Zip" : "plugins/UObjectPlugin/UObjectPlugin.zip",
 

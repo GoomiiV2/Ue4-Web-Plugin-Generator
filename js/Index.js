@@ -1,4 +1,3 @@
-var PluginList = {};
 var ZipFileData = null;
 var ExtsToRepalceIn = ["cpp", "h", "uplugin", "cs"];
 
@@ -31,11 +30,9 @@ function LoadPlugin(url)
             if(err)
             {
                 console.warn("Error loading zipfile: "+err);
-                return;
             }
             else
             {
-                console.log("Loaded zip data");
                 ZipFileData = zipData;
             }
         });
@@ -73,7 +70,6 @@ function CreatePlugin()
             {
                 var newFile = ReplaceWithValues(zipEntry.asText(), Replacements);
                 outZip.file(FileName, newFile, {binary:false});
-                console.log(newFile);
             }
             else
             {
@@ -81,7 +77,16 @@ function CreatePlugin()
             }
         });
 
-        window.location = "data:application/zip;base64," + outZip.generate({type:"base64"});
+        //window.location = "data:application/zip;base64," + outZip.generate({type:"base64"});
+        try
+        {
+            var blob = outZip.generate({type:"blob"});
+            saveAs(blob, "Plugin.zip");
+        }
+        catch(e)
+        {
+            alert("Error when trying to save zip, maybe you are using an old browser?");
+        }
     }
     else
     {
@@ -94,8 +99,11 @@ function ReplaceWithValues(str, replacements)
     var data = str;
     for (var name in replacements)
     {
-        var tag = GetReplaceTag(name);
-        data = data.replace(new RegExp(tag, 'g'), replacements[name]);
+        if (replacements.hasOwnProperty(name))
+        {
+            var tag = GetReplaceTag(name);
+            data = data.replace(new RegExp(tag, 'g'), replacements[name]);
+        }
     }
 
     return data;
@@ -103,8 +111,7 @@ function ReplaceWithValues(str, replacements)
 
 function GetReplaceTag(tag)
 {
-    var str = "{{"+tag+"}}";
-    return str;
+    return "{{"+tag+"}}";
 }
 
 // http://stackoverflow.com/a/1203361
