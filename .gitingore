@@ -2,3 +2,4 @@
 plugins\UObjectPlugin\{{PluginName}}
 plugins\UObjectPlugin\UObjectPlugin
 plugins\BlankPlugin\{{PluginName}}
+plugins\UObjectPluginSeprateHeader\{{PluginName}}

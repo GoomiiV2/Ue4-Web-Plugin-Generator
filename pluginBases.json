@@ -8,6 +8,10 @@
         {
             "Name" : "UObject Plugin by Epic",
             "Url" : "plugins/UObjectPlugin"
+        },
+        {
+            "Name" : "UObject Plugin by Epic (Separate Header)",
+            "Url" : "plugins/UObjectPluginSeprateHeader"
         }
     ]
 }
